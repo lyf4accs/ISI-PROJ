@@ -1,0 +1,88 @@
+:root {
+  --color-primary: #2563eb;
+  --color-primary-soft: #dbeafe;
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --radius-lg: 0.75rem;
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+body {
+  background: radial-gradient(circle at top, #eff6ff, #f5f5f5 60%);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header,
+.app-footer {
+  padding: 1rem 1.5rem;
+  background-color: #ffffffd9;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.app-footer {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: none;
+  margin-top: auto;
+}
+
+.app-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.app-nav {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-button {
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease,
+    border-color 0.1s ease;
+}
+
+.nav-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+.nav-button--active {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.app-root {
+  padding: 1.5rem;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
