@@ -5,10 +5,48 @@ export function renderAboutView(root) {
   root.innerHTML = '';
 
   const card = createElement('section', { className: 'card' });
-  const title = createElement('h2', { className: 'card-title', text: 'About SIGED' });
-  const body = createElement('p', {
-    text: 'SIGED (Management System for Detectives) manages detective applications, approvals, levels and promotions. Exercise 1 implements the registration of applications with a dynamic JSON database and a one-application-per-month restriction.',
+
+  const title = createElement('h2', {
+    className: 'card-title',
+    text: 'About SIGED',
   });
+
+  const body = createElement('div', {
+    className: 'about-bubbles',
+  });
+
+  body.innerHTML = `
+    <div class="bubble">
+      <h3>What is SIGED?</h3>
+      <p>SIGED is the internal Management System for Detectives. It centralizes all detective applications, role levels, promotions, photographic reports, courts, and report acquisitions.</p>
+    </div>
+
+    <div class="bubble">
+      <h3>Exercise 1</h3>
+      <ul>
+        <li>Detective application form with full validation</li>
+        <li>Manual date entry (DD/MM/YYYY) with real validation</li>
+        <li>Automatic creation of new detectives</li>
+        <li>One-application-per-month rule</li>
+        <li>Approval system with level assignment</li>
+        <li>Level price management</li>
+        <li>Promotion system (upward only)</li>
+      </ul>
+    </div>
+
+    <div class="bubble">
+      <h3>Exercise 2</h3>
+      <ul>
+        <li>Creation and listing of photographic reports</li>
+        <li>Full CRUD: Courts (create, edit, delete)</li>
+        <li>Purchase slip creation</li>
+        <li>Date validation (DD/MM/YYYY) without system clocks</li>
+        <li>Automatic calculation: detective payment = price_per_photo × photos</li>
+        <li>Restriction: court payment ≥ detective payment</li>
+        <li>Listing of all purchase slips</li>
+      </ul>
+    </div>
+  `;
 
   card.append(title, body);
   root.appendChild(card);
