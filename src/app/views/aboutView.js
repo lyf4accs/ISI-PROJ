@@ -18,7 +18,7 @@ export function renderAboutView(root) {
   body.innerHTML = `
     <div class="bubble">
       <h3>What is SIGED?</h3>
-      <p>SIGED is the internal Management System for Detectives. It centralizes all detective applications, role levels, promotions, photographic reports, courts, and report acquisitions.</p>
+      <p>SIGED is the internal Management System for Detectives. It centralizes all detective applications, role levels, promotions, photographic reports, courts, VIP cases, and report acquisitions.</p>
     </div>
 
     <div class="bubble">
@@ -44,6 +44,20 @@ export function renderAboutView(root) {
         <li>Automatic calculation: detective payment = price_per_photo × photos</li>
         <li>Restriction: court payment ≥ detective payment</li>
         <li>Listing of all purchase slips</li>
+      </ul>
+    </div>
+
+    <div class="bubble">
+      <h3>Exercise 3</h3>
+      <ul>
+        <li>Registration of VIP cases requested by courts</li>
+        <li>Manual creation date with full DD/MM/YYYY validation</li>
+        <li>Assignment of a VIP case to exactly one detective</li>
+        <li>Validation: assignment date ≥ creation date</li>
+        <li>Finalisation of VIP cases with completion date</li>
+        <li>Validation: completion date ≥ assignment date</li>
+        <li>Automatic status updates reflected in the UI</li>
+        <li>Listing of all VIP cases: unassigned, assigned, and completed</li>
       </ul>
     </div>
   `;
