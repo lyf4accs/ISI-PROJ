@@ -178,3 +178,34 @@ export async function createSlip(payload) {
   });
   return res.json();
 }
+export async function getVipCases() {
+  const res = await fetch(`${BASE_URL}/vip`);
+  return res.json();
+}
+
+export async function createVipCase(payload) {
+  const res = await fetch(`${BASE_URL}/vip`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}
+
+export async function assignVipCase(id, payload) {
+  const res = await fetch(`${BASE_URL}/vip/${id}/assign`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}
+
+export async function finaliseVipCase(id, payload) {
+  const res = await fetch(`${BASE_URL}/vip/${id}/complete`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}

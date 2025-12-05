@@ -191,5 +191,37 @@
       "amount_paid_to_detective": 240,
       "date": "26/02/2021"
     }
+  ],
+  "vip_cases": [
+    {
+      "vip_id": 1,
+      "court_cif": "X123",
+      "description": "Photo theft at museum",
+      "payment": 300,
+      "creation_date": "04/12/2025",
+      "assigned_to": null,
+      "assignment_date": null,
+      "completion_date": null
+    },
+    {
+      "vip_id": 2,
+      "court_cif": "1234567890",
+      "description": "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      "payment": 300000,
+      "creation_date": "12/11/2021",
+      "assigned_to": "12324",
+      "assignment_date": "02/12/2025",
+      "completion_date": "02/12/2025"
+    },
+    {
+      "vip_id": 3,
+      "court_cif": "1234567890",
+      "description": "asfjofihnecjnajldncvlaksnmckasnclaknlsjknckqawc",
+      "payment": 40020,
+      "creation_date": "12/11/2021",
+      "assigned_to": "12324",
+      "assignment_date": "01/12/2025",
+      "completion_date": null
+    }
   ]
 }

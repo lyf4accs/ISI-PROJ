@@ -9,6 +9,7 @@ import { renderPromotionsView } from './views/promotionsView.js';
 import { renderReportsView } from './views/reportsView.js';
 import { renderCourtsView } from './views/courtsView.js';
 import { renderSlipsView } from './views/slipsView.js';
+import { renderVipView } from './views/vipView.js';
 
 export class App {
   constructor(rootElement) {
@@ -22,6 +23,7 @@ export class App {
       reports: () => renderReportsView(this.root),
       courts: () => renderCourtsView(this.root),
       slips: () => renderSlipsView(this.root),
+      vip: () => renderVipView(this.root),
       about: () => renderAboutView(this.root),
     });
   }

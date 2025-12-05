@@ -54,6 +54,12 @@ async function writeDb(db) {
   await fs.writeFile(DB_PATH, formatted, 'utf8');
 }
 
+function parseDate(ddmmyyyy) {
+  const [d, m, y] = ddmmyyyy.split('/').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+
 // ─── API endpoints ────────────────────────────────────────
 
 // Get full DB
@@ -364,18 +370,6 @@ const alreadySubmittedThisMonth = db.applications.some(app => {
   }
 });
 
-// SPA fallback (if you open http://localhost:3000 directly)
-app.use((req, res, next) => {
-  if (!req.path.startsWith('/api')) {
-    return res.sendFile(path.join(STATIC_DIR, 'index.html'));
-  }
-  next();
-});
-
-// ─── Start server ─────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`SIGED running at http://localhost:${PORT}`);
-});
 
 
 app.get('/api/reports', async (req, res) => {
@@ -548,4 +542,105 @@ app.post('/api/slips', async (req, res) => {
     console.error(err);
     res.status(500).json({ ok: false, error: "Error creating purchase slip." });
   }
+});
+// GET all VIP cases
+app.get('/api/vip', async (req, res) => {
+  const db = await readDb();
+  res.json(db.vip_cases || []);
+});
+
+// Create VIP case
+app.post('/api/vip', async (req, res) => {
+  const { court_cif, description, payment, creation_date } = req.body;
+
+  if (!court_cif || !description || !payment || !creation_date) {
+    return res.status(400).json({ ok: false, error: "All fields are required." });
+  }
+
+  const db = await readDb();
+  const ids = db.vip_cases.map(v => v.vip_id);
+  const nextId = ids.length ? Math.max(...ids) + 1 : 1;
+
+  const newCase = {
+    vip_id: nextId,
+    court_cif,
+    description,
+    payment: Number(payment),
+    creation_date,
+    assigned_to: null,
+    assignment_date: null,
+    completion_date: null
+  };
+
+  db.vip_cases.push(newCase);
+  await writeDb(db);
+
+  res.json({ ok: true, vipCase: newCase });
+});
+
+// Assign VIP case
+app.post('/api/vip/:id/assign', async (req, res) => {
+  const id = Number(req.params.id);
+  const { detectiveId, assignment_date } = req.body;
+
+  const db = await readDb();
+  const vip = db.vip_cases.find(v => v.vip_id === id);
+
+  if (!vip) return res.status(404).json({ ok: false, error: "VIP case not found." });
+  if (vip.assigned_to) return res.status(400).json({ ok: false, error: "VIP already assigned." });
+
+  // date check
+  const [d1, m1, y1] = vip.creation_date.split('/').map(Number);
+  const [d2, m2, y2] = assignment_date.split('/').map(Number);
+
+  if (new Date(y2, m2 - 1, d2) < new Date(y1, m1 - 1, d1)) {
+    return res.status(400).json({ ok: false, error: "Assignment cannot be before creation." });
+  }
+
+  vip.assigned_to = detectiveId;
+  vip.assignment_date = assignment_date;
+
+  await writeDb(db);
+  res.json({ ok: true });
+});
+
+// Finalise VIP case
+app.post('/api/vip/:id/complete', async (req, res) => {
+  const id = Number(req.params.id);
+  const { completion_date } = req.body;
+
+  const db = await readDb();
+  const vip = db.vip_cases.find(v => v.vip_id === id);
+
+  if (!vip) return res.status(404).json({ ok: false, error: "VIP case not found." });
+  if (!vip.assigned_to) return res.status(400).json({ ok: false, error: "VIP case is not assigned." });
+
+  // date check
+  const [d1, m1, y1] = vip.assignment_date.split('/').map(Number);
+  const [d2, m2, y2] = completion_date.split('/').map(Number);
+
+  if (new Date(y2, m2 - 1, d2) < new Date(y1, m1 - 1, d1)) {
+    return res.status(400).json({ ok: false, error: "Completion cannot be before assignment." });
+  }
+
+  vip.completion_date = completion_date;
+
+  await writeDb(db);
+  res.json({ ok: true });
+});
+
+
+
+
+// SPA fallback (if you open http://localhost:3000 directly)
+app.use((req, res, next) => {
+  if (!req.path.startsWith('/api')) {
+    return res.sendFile(path.join(STATIC_DIR, 'index.html'));
+  }
+  next();
+});
+
+// ─── Start server ─────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`SIGED running at http://localhost:${PORT}`);
 });
