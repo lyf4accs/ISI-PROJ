@@ -1,18 +1,35 @@
+// src/app/app.js
 import { Router } from '../core/router.js';
-import { createElement } from '../ui/dom.js';
+import { renderRegisterView } from './views/registerView.js';
+import { renderHistoricalView } from './views/historicalView.js';
+import { renderAboutView } from './views/aboutView.js';
+import { renderApprovalView } from './views/approvalView.js';
+import { renderLevelsView } from './views/levelsView.js';
+import { renderPromotionsView } from './views/promotionsView.js';
+import { renderReportsView } from './views/reportsView.js';
+import { renderCourtsView } from './views/courtsView.js';
+import { renderSlipsView } from './views/slipsView.js';
 
 export class App {
   constructor(rootElement) {
     this.root = rootElement;
     this.router = new Router({
-      home: () => this.renderHome(),
-      about: () => this.renderAbout(),
+      home: () => renderRegisterView(this.root),
+      historical: () => renderHistoricalView(this.root),
+      approvals: () => renderApprovalView(this.root),
+      levels: () => renderLevelsView(this.root),
+      promotions: () => renderPromotionsView(this.root),
+      reports: () => renderReportsView(this.root),
+      courts: () => renderCourtsView(this.root),
+      slips: () => renderSlipsView(this.root),
+      about: () => renderAboutView(this.root),
     });
   }
 
   init() {
     this._setupNavListeners();
     this.router.navigate('home');
+    this._updateActiveNav('home');
   }
 
   _setupNavListeners() {
@@ -32,32 +49,5 @@ export class App {
       const route = btn.getAttribute('data-route');
       btn.classList.toggle('nav-button--active', route === activeRoute);
     });
-  }
-
-  renderHome() {
-    this.root.innerHTML = '';
-
-    const card = createElement('section', { className: 'card' });
-    const title = createElement('h2', { className: 'card-title', text: 'Dashboard (Placeholder)' });
-    const subtitle = createElement('p', {
-      className: 'card-subtitle',
-      text: 'Base architecture ready. We will plug actual features here once specs are defined.',
-    });
-
-    card.append(title, subtitle);
-    this.root.appendChild(card);
-  }
-
-  renderAbout() {
-    this.root.innerHTML = '';
-
-    const card = createElement('section', { className: 'card' });
-    const title = createElement('h2', { className: 'card-title', text: 'About this app' });
-    const body = createElement('p', {
-      text: 'This is a skeleton SPA using vanilla JS modules. Routing, state and a JSON-backed data layer will be added as we define the requirements.',
-    });
-
-    card.append(title, body);
-    this.root.appendChild(card);
   }
 }

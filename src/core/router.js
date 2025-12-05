@@ -1,15 +1,15 @@
+// src/core/router.js
 export class Router {
-  constructor(routes = {}) {
+  constructor(routes) {
     this.routes = routes;
-    this.currentRoute = null;
   }
 
-  navigate(routeName) {
-    if (!this.routes[routeName]) {
-      console.warn(`Route "${routeName}" not found`);
-      return;
+  navigate(route) {
+    const fn = this.routes[route];
+    if (typeof fn === 'function') {
+      fn();   // ejecuta la función que App ya preparó con root
+    } else {
+      console.warn(`Route not found: ${route}`);
     }
-    this.currentRoute = routeName;
-    this.routes[routeName]();
   }
 }

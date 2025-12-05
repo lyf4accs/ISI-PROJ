@@ -10,20 +10,28 @@
 <body>
   <header class="app-header">
     <h1 class="app-title">ISI Project</h1>
-    <nav class="app-nav">
-      <button data-route="home" class="nav-button nav-button--active">Home</button>
-      <button data-route="about" class="nav-button">About</button>
+       <nav class="app-nav">
+      <button class="nav-button" data-route="home">Register</button>
+      <button class="nav-button" data-route="historical">Historical</button>
+      <button class="nav-button" data-route="approvals">Approvals</button>
+      <button class="nav-button" data-route="levels">Levels</button>
+      <button class="nav-button" data-route="promotions">Promotions</button>
+      <button class="nav-button" data-route="reports">Reports</button>
+      <button class="nav-button" data-route="courts">Courts</button>
+      <button class="nav-button" data-route="slips">Purchase Slips</button>
+      <button class="nav-button" data-route="about">About</button>
     </nav>
   </header>
 
-  <main id="app" class="app-root">
-    <!-- App content rendered here -->
-  </main>
+<div id="app"></div>
+
 
   <footer class="app-footer">
     <small>© <span id="year"></span> ISI Project</small>
   </footer>
 
   <script type="module" src="./src/main.js"></script>
+
+
 </body>
 </html>

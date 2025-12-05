@@ -1,7 +1,195 @@
 {
   "meta": {
-    "version": 1,
-    "lastUpdated": "2025-12-02T00:00:00.000Z"
+    "version": 2,
+    "description": "SIGED database for ISI project",
+    "tables": {
+      "detectives": {
+        "national_id": "string (PK, Spanish DNI or identifier)",
+        "first_name": "string",
+        "last_name": "string",
+        "address": "string",
+        "city": "string",
+        "postal_code": "string",
+        "telephone": "string",
+        "level": "number (1-4)",
+        "promotion_history": "array"
+      },
+      "applications": {
+        "application_id": "number (PK, auto, non editable)",
+        "detectiveId": "string (national_id)",
+        "date": "string (YYYY-MM-DD, non editable)",
+        "equipment": "string (≤350 chars)",
+        "cv": "string (≤350 chars)",
+        "status": "string (pending | approved | rejected)"
+      },
+      "levels": {
+        "level": "number (1-4)",
+        "price_per_photo": "number"
+      }
+    }
   },
-  "items": []
+  "levels": [
+    {
+      "level": 1,
+      "price_per_photo": 4
+    },
+    {
+      "level": 2,
+      "price_per_photo": 11
+    },
+    {
+      "level": 3,
+      "price_per_photo": 22
+    },
+    {
+      "level": 4,
+      "price_per_photo": 30
+    }
+  ],
+  "detectives": [
+    {
+      "national_id": "12324",
+      "first_name": "ksdjfskd",
+      "last_name": "sdkjfsldjg",
+      "address": "qikfjqekfq",
+      "city": "lasgfjlakefq",
+      "postal_code": "46106",
+      "telephone": "214134134",
+      "level": null,
+      "promotion_history": []
+    },
+    {
+      "national_id": "12345678Z",
+      "first_name": "Prueba",
+      "last_name": "Prueba",
+      "address": "C/ prueba",
+      "city": "Prueba",
+      "postal_code": "46106",
+      "telephone": "666333777",
+      "level": 4,
+      "promotion_history": [
+        {
+          "from": 1,
+          "to": 3,
+          "date": "2025-12-04"
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "date": "2025-12-04"
+        }
+      ]
+    },
+    {
+      "national_id": "12345679F",
+      "first_name": "klaur",
+      "last_name": "asdas",
+      "address": "Av. de les Corts Valencianes, 39, 7º B",
+      "city": "Valencia",
+      "postal_code": "46015",
+      "telephone": "5235245",
+      "level": 3,
+      "promotion_history": [
+        {
+          "from": 1,
+          "to": 2,
+          "date": "2025-12-04"
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "date": "2025-12-05"
+        }
+      ]
+    },
+    {
+      "national_id": "12345670S",
+      "first_name": "sfdsdf",
+      "last_name": "fsdfs",
+      "address": "aefe",
+      "city": "Valencia",
+      "postal_code": "46015",
+      "telephone": "111111111",
+      "level": 2,
+      "promotion_history": []
+    },
+    {
+      "national_id": "12345670V",
+      "first_name": "fafdsf",
+      "last_name": "dfsdf",
+      "address": "sdfdsf",
+      "city": "dfsfsd",
+      "postal_code": "46001",
+      "telephone": "1224111",
+      "level": null,
+      "promotion_history": []
+    }
+  ],
+  "applications": [
+    {
+      "application_id": 1,
+      "detectiveId": "12324",
+      "date": "2025-12-03",
+      "equipment": "13rmndakfjanega",
+      "cv": "egkwjeglkwrg",
+      "status": "rejected"
+    },
+    {
+      "application_id": 2,
+      "detectiveId": "12345678Z",
+      "date": "2025-12-03",
+      "equipment": "Prueba prueba prueba",
+      "cv": "Prueba prueba prueba",
+      "status": "approved"
+    },
+    {
+      "application_id": 3,
+      "detectiveId": "12345679F",
+      "date": "2025-12-04",
+      "equipment": "sadcsaefefffffffffffffffffffffffff",
+      "cv": "fffffffffffffffffffffffffffffffffffff",
+      "status": "approved"
+    },
+    {
+      "application_id": 4,
+      "detectiveId": "12345670S",
+      "date": "10/17/2050",
+      "equipment": "asdfsddddddddddddddddddddddddddddd",
+      "cv": "dddddddddddddddddddddddddddddddddddddd",
+      "status": "approved"
+    },
+    {
+      "application_id": 5,
+      "detectiveId": "12345670V",
+      "date": "11/12/2023",
+      "equipment": "asfafffffffffffffffffffffffff",
+      "cv": "afqeffffffffffffffffffffffffffffffff",
+      "status": "rejected"
+    }
+  ],
+  "courts": [
+    {
+      "cif": "1234567890",
+      "name": "sasfdfadf",
+      "address": "safasfasfsfqaf"
+    }
+  ],
+  "reports": [
+    {
+      "report_id": 1,
+      "detectiveId": "12345678Z",
+      "num_photos": 8,
+      "description": "dfwefwefcewfe"
+    }
+  ],
+  "purchase_slips": [
+    {
+      "slip_id": 1,
+      "report_id": 1,
+      "court_cif": "1234567890",
+      "amount_paid_by_court": 1000,
+      "amount_paid_to_detective": 240,
+      "date": "26/02/2021"
+    }
+  ]
 }

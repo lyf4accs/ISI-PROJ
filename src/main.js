@@ -1,3 +1,4 @@
+// src/main.js
 import { App } from './app/App.js';
 
 document.addEventListener('DOMContentLoaded', () => {
